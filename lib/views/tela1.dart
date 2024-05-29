@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/styles.dart';
@@ -7,17 +8,28 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: pink,
-      body: Column(
-        children: [
-          // LOGO DA LOVEPEOPLE E NOME
-          Container(
-            color: white,
+    double topContainerHeight = MediaQuery.of(context).size.width / 2;
+    Radius radius = Radius.circular(topContainerHeight);
+    const SizedBox bigSpacer = SizedBox(height: 20);
+    const SizedBox mediumSpacer = SizedBox(height: 10);
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: pink,
+        resizeToAvoidBottomInset: false,
+        appBar: // LOGO DA LOVEPEOPLE E NOME
+            PreferredSize(
+          preferredSize: Size.fromHeight(topContainerHeight),
+          child: Container(
+            decoration: BoxDecoration(
+                color: white,
+                borderRadius:
+                    BorderRadius.only(bottomLeft: radius, bottomRight: radius)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
                       'assets/images/lovepeople_logo.png',
@@ -35,63 +47,91 @@ class FirstPage extends StatelessWidget {
               ],
             ),
           ),
-
-          // FORMULARIO DE LOGIN
-          const Text(
-            'Quem bom que voltou!',
-            style:
-                TextStyle(color: white, fontFamily: 'Montserrat', fontSize: 20),
-          ),
-          TextFormField(
-            decoration:
-                textFormFieldDecorator('Número de telefone, email ou CPF'),
-          ),
-          TextFormField(
-            decoration: textFormFieldDecorator('Senha'),
-          ),
-          Row(
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // FORMULARIO DE LOGIN
               const Text(
-                'Esqueceu seu login ou senha? ',
-                style: TextStyle(color: white, fontSize: 12),
+                'Quem bom que voltou!',
+                style: TextStyle(
+                    color: white, fontFamily: 'Montserrat', fontSize: 20),
               ),
-              TextButton(
+              bigSpacer,
+              TextFormField(
+                decoration:
+                    textFormFieldDecorator('Número de telefone, email ou CPF'),
+              ),
+              mediumSpacer,
+              TextFormField(
+                decoration: textFormFieldDecorator('Senha'),
+                obscureText: true,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Esqueceu seu login ou senha? ',
+                    style: TextStyle(
+                        color: white, fontSize: 12, fontFamily: 'Tahoma'),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Clique aqui',
+                      style: TextStyle(
+                          color: yellow, fontSize: 12, fontFamily: 'Tahoma'),
+                    ),
+                  ),
+                ],
+              ),
+              FilledButton(
+                style: buttonStyle,
                 onPressed: () {},
                 child: const Text(
-                  'Clique aqui',
-                  style: TextStyle(color: yellow, fontSize: 12),
+                  'Entrar',
+                  style: TextStyle(
+                    color: white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 16,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        bottomNavigationBar: SizedBox(
+          height: 65,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const DottedLine(dashColor: white),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Não possui cadastro?',
+                      style: TextStyle(
+                          color: white, fontSize: 14, fontFamily: 'Tahoma'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Clique aqui',
+                        style: TextStyle(
+                            color: yellow, fontSize: 14, fontFamily: 'Tahoma'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          FilledButton(
-            style: buttonStyle,
-            onPressed: () {},
-            child: const Text(
-              'Entrar',
-              style: TextStyle(
-                color: white,
-                fontFamily: 'Montserrat',
-                fontSize: 16,
-              ),
-            ),
-          )
-        ],
-      ),
-      bottomNavigationBar: Row(
-        children: [
-          const Text(
-            'Não possui cadastro?',
-            style: TextStyle(color: white, fontSize: 14),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Clique aqui',
-              style: TextStyle(color: yellow, fontSize: 14),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
