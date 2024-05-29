@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles/colors_style.dart';
+import '../styles/styles.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -11,27 +11,87 @@ class FirstPage extends StatelessWidget {
       backgroundColor: pink,
       body: Column(
         children: [
-          const Text('LOGO'),
-          const Text('Lovepeople'),
-          const Text('Quem bom que voltou!'),
-          TextFormField(
-            decoration: const InputDecoration(
-                hintText: 'Numero de telefone, email ou CPF'),
+          // LOGO DA LOVEPEOPLE E NOME
+          Container(
+            color: white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/lovepeople_logo.png',
+                      height: 100,
+                    ),
+                    const Text(
+                      'Lovepeople',
+                      style: TextStyle(
+                          color: purple,
+                          fontFamily: 'Montserrat',
+                          fontSize: 12),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // FORMULARIO DE LOGIN
+          const Text(
+            'Quem bom que voltou!',
+            style:
+                TextStyle(color: white, fontFamily: 'Montserrat', fontSize: 20),
           ),
           TextFormField(
-            decoration: const InputDecoration(hintText: 'Senha'),
+            decoration:
+                textFormFieldDecorator('Número de telefone, email ou CPF'),
           ),
-          const Row(
+          TextFormField(
+            decoration: textFormFieldDecorator('Senha'),
+          ),
+          Row(
             children: [
-              Text('Esqueceu seu login ou senha? '),
-              Text('Clique aqui')
+              const Text(
+                'Esqueceu seu login ou senha? ',
+                style: TextStyle(color: white, fontSize: 12),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Clique aqui',
+                  style: TextStyle(color: yellow, fontSize: 12),
+                ),
+              ),
             ],
           ),
-          FilledButton(onPressed: () {}, child: const Text('Entrar'))
+          FilledButton(
+            style: buttonStyle,
+            onPressed: () {},
+            child: const Text(
+              'Entrar',
+              style: TextStyle(
+                color: white,
+                fontFamily: 'Montserrat',
+                fontSize: 16,
+              ),
+            ),
+          )
         ],
       ),
-      bottomNavigationBar: const Row(
-        children: [Text('Nao possui cadastro?'), Text('Clique aqui')],
+      bottomNavigationBar: Row(
+        children: [
+          const Text(
+            'Não possui cadastro?',
+            style: TextStyle(color: white, fontSize: 14),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Clique aqui',
+              style: TextStyle(color: yellow, fontSize: 14),
+            ),
+          ),
+        ],
       ),
     );
   }
