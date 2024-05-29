@@ -20,13 +20,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   assets:
-    - assets/lovepeople_logo.png
+    - assets/images/lovepeople_logo.png
+
   fonts:
     - family: Tahoma
       fonts:
         - asset: assets/fonts/Tahoma.ttf
-    - family: Monserrat
+    - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Bold.ttf
         - asset: assets/fonts/Montserrat-SemiBold.ttf
