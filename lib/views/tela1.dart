@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/styles.dart';
@@ -7,28 +8,29 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: yellow,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 35),
-          child: Column(
-            children: [
-              // LOGO DA LOVEPEOPLE E NOME
-              Container(
-                height: 220.0, // Altere o valor conforme necessário
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(
-                        220.0), // Altere o valor do raio conforme necessário
-                    bottomRight: Radius.circular(
-                        220.0), // Altere o valor do raio conforme necessário
-                  ),
-                ),
 
-                child: Row(
+    double topContainerHeight = MediaQuery.of(context).size.width / 2;
+    Radius radius = Radius.circular(topContainerHeight);
+    const SizedBox bigSpacer = SizedBox(height: 20);
+    const SizedBox mediumSpacer = SizedBox(height: 10);
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: pink,
+        resizeToAvoidBottomInset: false,
+        appBar: // LOGO DA LOVEPEOPLE E NOME
+            PreferredSize(
+          preferredSize: Size.fromHeight(topContainerHeight),
+          child: Container(
+            decoration: BoxDecoration(
+                color: white,
+                borderRadius:
+                    BorderRadius.only(bottomLeft: radius, bottomRight: radius)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
@@ -51,100 +53,96 @@ class FirstPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
 
+              ],
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               // FORMULARIO DE LOGIN
-
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Que bom que voltou!',
-                        style: TextStyle(
-                            color: white,
-                            fontFamily: 'Montserrat',
-                            fontSize: 25),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 30),
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.blue,
-                        ),
-                        decoration: textFormFieldDecorator(
-                            'Número de telefone, email ou CPF'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 10),
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.blue,
-                        ),
-                        decoration: textFormFieldDecorator('Senha'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            'Esqueceu seu login ou senha? ',
-                            style: TextStyle(color: white, fontSize: 15),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Clique aqui',
-                              style: TextStyle(color: yellow, fontSize: 15),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 25),
-                      ),
-                      FilledButton(
-                        style: buttonStyle,
-                        onPressed: () {},
-                        child: const Text(
-                          'Entrar',
-                          style: TextStyle(
-                            color: white,
-                            fontFamily: 'Montserrat',
-                            fontSize: 16,
-                          ),
-                        ),
-                      )
-                    ],
+              const Text(
+                'Quem bom que voltou!',
+                style: TextStyle(
+                    color: white, fontFamily: 'Montserrat', fontSize: 20),
+              ),
+              bigSpacer,
+              TextFormField(
+                decoration:
+                    textFormFieldDecorator('Número de telefone, email ou CPF'),
+              ),
+              mediumSpacer,
+              TextFormField(
+                decoration: textFormFieldDecorator('Senha'),
+                obscureText: true,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Esqueceu seu login ou senha? ',
+                    style: TextStyle(
+                        color: white, fontSize: 12, fontFamily: 'Tahoma'),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Clique aqui',
+                      style: TextStyle(
+                          color: yellow, fontSize: 12, fontFamily: 'Tahoma'),
+                    ),
+                  ),
+                ],
+              ),
+              FilledButton(
+                style: buttonStyle,
+                onPressed: () {},
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(
+                    color: white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 16,
                   ),
                 ),
               )
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Não possui cadastro?',
-            style: TextStyle(color: Colors.white, fontSize: 14),
+        bottomNavigationBar: SizedBox(
+          height: 65,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const DottedLine(dashColor: white),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Não possui cadastro?',
+                      style: TextStyle(
+                          color: white, fontSize: 14, fontFamily: 'Tahoma'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Clique aqui',
+                        style: TextStyle(
+                            color: yellow, fontSize: 14, fontFamily: 'Tahoma'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Clique aqui',
-              style: TextStyle(color: Colors.yellow, fontSize: 14),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

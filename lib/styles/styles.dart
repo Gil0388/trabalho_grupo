@@ -19,7 +19,8 @@ InputDecoration textFormFieldDecorator(String hintText) {
     filled: true,
     fillColor: white,
     hintText: hintText,
-    hintStyle: const TextStyle(color: purple, fontSize: 14),
+    hintStyle:
+        const TextStyle(color: purple, fontFamily: 'Tahoma', fontSize: 14),
     border: const OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.all(
