@@ -8,10 +8,9 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     double topContainerHeight = MediaQuery.of(context).size.width / 2;
     Radius radius = Radius.circular(topContainerHeight);
-    const SizedBox bigSpacer = SizedBox(height: 20);
+    const SizedBox bigSpacer = SizedBox(height: 10);
     const SizedBox mediumSpacer = SizedBox(height: 10);
 
     return SafeArea(
@@ -30,7 +29,6 @@ class FirstPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
-
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
@@ -53,7 +51,6 @@ class FirstPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -140,7 +137,6 @@ class FirstPage extends StatelessWidget {
                 ),
               ),
             ],
-
           ),
         ),
       ),
