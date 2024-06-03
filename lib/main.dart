@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trabalho_grupo/views/tela1.dart';
+import 'package:trabalho_grupo/views/tela5.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         initialRoute: '/',
-        routes: {'/': (context) => const FirstPage()});
+        routes: {'/': (context) => const FivePage()});
   }
 }
