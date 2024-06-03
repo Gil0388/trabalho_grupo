@@ -10,7 +10,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double topContainerHeight = MediaQuery.of(context).size.width / 2;
     Radius radius = Radius.circular(topContainerHeight);
-    const SizedBox bigSpacer = SizedBox(height: 10);
+    const SizedBox bigSpacer = SizedBox(height: 340);
     const SizedBox mediumSpacer = SizedBox(height: 10);
 
     return SafeArea(
