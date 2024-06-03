@@ -8,6 +8,7 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     double topContainerHeight = MediaQuery.of(context).size.width / 2;
     Radius radius = Radius.circular(topContainerHeight);
     const SizedBox bigSpacer = SizedBox(height: 20);
@@ -29,21 +30,30 @@ class FirstPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
+
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/lovepeople_logo.png',
-                      height: 100,
-                    ),
-                    const Text(
-                      'Lovepeople',
-                      style: TextStyle(
-                          color: purple,
-                          fontFamily: 'Montserrat',
-                          fontSize: 12),
+                    Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(top: 80),
+                          child: Image.asset(
+                            'assets/images/lovepeople_logo.png',
+                            height: 100,
+                          ),
+                        ),
+                        const Text(
+                          'Lovepeople',
+                          style: TextStyle(
+                              color: purple,
+                              fontFamily: 'Montserrat',
+                              fontSize: 12),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+
               ],
             ),
           ),
@@ -130,6 +140,7 @@ class FirstPage extends StatelessWidget {
                 ),
               ),
             ],
+
           ),
         ),
       ),
