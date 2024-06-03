@@ -8,7 +8,7 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: pink,
+      backgroundColor: yellow,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.only(top: 35),
@@ -17,12 +17,14 @@ class FirstPage extends StatelessWidget {
               // LOGO DA LOVEPEOPLE E NOME
               Container(
                 height: 220.0, // Altere o valor conforme necessário
-              width: double.infinity,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(220.0), // Altere o valor do raio conforme necessário
-                    bottomRight: Radius.circular(220.0), // Altere o valor do raio conforme necessário
+                    bottomLeft: Radius.circular(
+                        220.0), // Altere o valor do raio conforme necessário
+                    bottomRight: Radius.circular(
+                        220.0), // Altere o valor do raio conforme necessário
                   ),
                 ),
 
@@ -33,7 +35,7 @@ class FirstPage extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 80),
-                          child:Image.asset(
+                          child: Image.asset(
                             'assets/images/lovepeople_logo.png',
                             height: 100,
                           ),
@@ -57,30 +59,29 @@ class FirstPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   padding: const EdgeInsets.only(top: 100),
-
-
                   child: Column(
-
-
                     children: [
-
-
                       const Text(
                         'Que bom que voltou!',
-                        style:
-                        TextStyle(color: white, fontFamily: 'Montserrat', fontSize: 25),
+                        style: TextStyle(
+                            color: white,
+                            fontFamily: 'Montserrat',
+                            fontSize: 25),
                       ),
-                      Container( padding: const EdgeInsets.only(top: 30),),
+                      Container(
+                        padding: const EdgeInsets.only(top: 30),
+                      ),
                       TextFormField(
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.blue,
                         ),
-                        decoration:
-                        textFormFieldDecorator('Número de telefone, email ou CPF'
-                        ),
+                        decoration: textFormFieldDecorator(
+                            'Número de telefone, email ou CPF'),
                       ),
-                      Container(          padding: const EdgeInsets.only(top: 10),),
+                      Container(
+                        padding: const EdgeInsets.only(top: 10),
+                      ),
                       TextFormField(
                         style: TextStyle(
                           fontSize: 18,
@@ -88,7 +89,9 @@ class FirstPage extends StatelessWidget {
                         ),
                         decoration: textFormFieldDecorator('Senha'),
                       ),
-                      Container(          padding: const EdgeInsets.only(top: 5),),
+                      Container(
+                        padding: const EdgeInsets.only(top: 5),
+                      ),
                       Row(
                         children: [
                           const Text(
@@ -102,11 +105,11 @@ class FirstPage extends StatelessWidget {
                               style: TextStyle(color: yellow, fontSize: 15),
                             ),
                           ),
-
-
                         ],
                       ),
-                      Container(          padding: const EdgeInsets.only(top: 25),),
+                      Container(
+                        padding: const EdgeInsets.only(top: 25),
+                      ),
                       FilledButton(
                         style: buttonStyle,
                         onPressed: () {},
@@ -123,12 +126,11 @@ class FirstPage extends StatelessWidget {
                   ),
                 ),
               )
-
             ],
           ),
-        ),),
-
-       bottomNavigationBar: Row(
+        ),
+      ),
+      bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
@@ -144,7 +146,6 @@ class FirstPage extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }
