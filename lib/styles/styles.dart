@@ -21,6 +21,7 @@ InputDecoration textFormFieldDecorator(String hintText) {
     hintText: hintText,
     hintStyle:
         const TextStyle(color: purple, fontFamily: 'Tahoma', fontSize: 14),
+    errorStyle: const TextStyle(color: white),
     border: const OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.all(
