@@ -6,6 +6,7 @@ const Color purple = Color.fromRGBO(49, 1, 155, 1);
 const Color blue = Color.fromRGBO(49, 1, 185, 1);
 const Color yellow = Color.fromRGBO(255, 214, 0, 1);
 const Color white = Colors.white;
+const Color pinkTranparent = Color.fromRGBO(169, 1, 247, 0.250);
 
 const Color yellowLight = Color.fromRGBO(255, 242, 204, 1);
 const Color greenLight = Color.fromRGBO(199, 255, 203, 1);
@@ -30,6 +31,17 @@ InputDecoration textFormFieldDecorator(String hintText) {
     ),
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  );
+}
+
+InputDecoration textFormFieldDecoratorPage5(String labelText) {
+  return InputDecoration(
+    labelText: labelText,
+    labelStyle: const TextStyle(fontFamily: 'Montserrat', color: purple),
+    border: InputBorder.none,
+    contentPadding:
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+    suffixIcon: const Icon(Icons.search, color: purple),
   );
 }
 

@@ -5,7 +5,7 @@ import 'package:trabalho_grupo/controller/login_controller.dart';
 import 'package:trabalho_grupo/views/tela1.dart';
 import 'package:trabalho_grupo/views/tela3.dart';
 import 'package:trabalho_grupo/views/tela2.dart';
-import 'package:trabalho_grupo/views/tela4.dart';
+// import 'package:trabalho_grupo/views/tela4.dart';
 import 'package:trabalho_grupo/views/tela5.dart';
 import 'package:trabalho_grupo/views/tela6.dart';
 
@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
             ),
         '/tela2': (context) => SecondPage(),
         '/tela3': (context) => ThreetPage(),
-        '/tela4': (context) => FourthPage(),
+        // '/tela4': (context) => FourthPage(),
         '/tela5': (context) => FivePage(),
         '/tela6': (context) => SixthPage(),
       },
-      initialRoute: '/tela1',
+      initialRoute: '/tela5',
     );
   }
 }

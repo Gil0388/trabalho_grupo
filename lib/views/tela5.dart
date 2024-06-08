@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:trabalho_grupo/styles/styles.dart';
+import 'package:trabalho_grupo/widgets/cards_e_funcoes.dart';
 
-class FivePage extends StatelessWidget {
+class FivePage extends StatefulWidget {
   const FivePage({super.key});
+
+  @override
+  State<FivePage> createState() => _FivePageState();
+}
+
+class _FivePageState extends State<FivePage> {
+  List<Lista> listagem = [];
+
+//! Metodo parara apagar o card.
+  void apagarCard(int index) {
+    setState(() {
+      listagem.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,137 +27,102 @@ class FivePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                // essa Row é responsavel pela logo e titulo ( Suas Listagens).
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: const BoxDecoration(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Row(
+//! Layout da logo.
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(100.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12, bottom: 10),
+//! Botão Navigator => "/Tela Anterior".
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Image.asset(
+                              'assets/images/lovepeople_logo.png',
+                              height: 56,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+//! Layout do titulo da pagina.
+                    Container(
+                      height: 100,
+                      width: 240,
+                      alignment: Alignment.bottomCenter,
+                      child: const Text(
+                        'Suas Listagens',
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.white,
+                            fontSize: 27),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+//! Layout do campo de pesquisa.
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: Container(
+                  decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(100.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12, bottom: 10),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Image.asset(
-                          'assets/images/lovepeople_logo.png',
-                          height: 56,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                      child: Container(
-                    height: 100,
-                    width: 240,
-                    alignment: Alignment.bottomCenter,
-                    child: const Text(
-                      'Suas Listagens',
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.white,
-                          fontSize: 27),
-                    ),
-                  )),
-                ],
-              ),
-              Column(
-                children: [
-                  Padding(
-                    // aqui fica a parte do campo de pesquisa.
-                    padding:
-                        const EdgeInsets.only(left: 30, right: 30, top: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Busque palavras-chave',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat', color: purple),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          suffixIcon: Icon(Icons.search, color: purple),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                // Por hora vou adicionar 3 conteiner para não fica vazio o layout
-                padding: const EdgeInsets.only(left: 30.0, right: 30),
-                child: Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: yellowLight,
-                        borderRadius: BorderRadius.circular(20)),
-                    width: 390,
-                    height: 150,
-                    child: const Text(
-                      'Informações...',
-                      textAlign: TextAlign.center,
-                    ),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                    decoration:
+                        textFormFieldDecoratorPage5('Busque palavra-chave'),
                   ),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              // Por hora vou adicionar 3 conteiner para não fica vazio o layout
+              //! Builder para gerar os Cards e suas funções.
               Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30),
-                child: Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: greenLight,
-                        borderRadius: BorderRadius.circular(20)),
-                    width: 390,
-                    height: 150,
-                    child: const Text(
-                      'Informações...',
-                      textAlign: TextAlign.center,
-                    ),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: SizedBox(
+                  height: 540,
+                  child: ListView.builder(
+                    itemCount: listagem.length,
+                    itemBuilder: (context, index) {
+                      return Cards(
+                        title: listagem[index].titulo,
+                        subtitle: listagem[index].descricao,
+                        color: listagem[index].cores,
+                        deletar: () {
+                          apagarCard(index);
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              //! Botão Navigator => /tela6.
               Padding(
-                // Por hora vou adicionar 3 conteiner para não fica vazio o layout
-                padding: const EdgeInsets.only(left: 30.0, right: 30),
-                child: Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: pinkLight,
-                        borderRadius: BorderRadius.circular(20)),
-                    width: 390,
-                    height: 150,
-                    child: const Text(
-                      'Informações...',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.only(top: 1.0),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/tela6').then((novoValor) {
+                        if (novoValor != null) {
+                          setState(() {
+                            listagem.add(novoValor as Lista);
+                          });
+                        }
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: pink, elevation: 0.0),
                     child: const Icon(
