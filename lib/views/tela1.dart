@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'package:trabalho_grupo/controller/login_controller.dart';
 import 'package:trabalho_grupo/views/tela2.dart';
+import 'package:trabalho_grupo/views/tela5.dart';
 
 import '../styles/styles.dart';
 
@@ -104,7 +105,10 @@ class _FirstPageState extends State<FirstPage> {
                           color: white, fontSize: 12, fontFamily: 'Tahoma'),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //inclusão da rota já tem cadastro 09/06/2024
+                        Navigator.pushNamed(context, '/tela4');
+                      },
                       child: const Text(
                         'Clique aqui',
                         style: TextStyle(
@@ -123,7 +127,7 @@ class _FirstPageState extends State<FirstPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SecondPage()));
+                                builder: (context) => const FivePage()));
                       } else {
                         _loginController.changeError(true);
                       }
@@ -173,7 +177,10 @@ class _FirstPageState extends State<FirstPage> {
                           color: white, fontSize: 14, fontFamily: 'Tahoma'),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      //inclusão da rota cadastro 09/06/2024
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/tela2');
+                      },
                       child: const Text(
                         'Clique aqui',
                         style: TextStyle(
@@ -191,4 +198,4 @@ class _FirstPageState extends State<FirstPage> {
   }
 }
 
-List<String> fakeUser = ['LovePeople', 'Turma5!'];
+List<String> fakeUser = ['conta', '123456'];

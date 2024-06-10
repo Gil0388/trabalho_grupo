@@ -111,7 +111,10 @@ class SecondPage extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              //inclusão da rota já tem cadastro 09/06/2024
+              Navigator.pushNamed(context, '/tela1');
+            },
             child: const Text(
               'Clique aqui',
               style: TextStyle(color: Colors.yellow, fontSize: 18),
