@@ -32,7 +32,10 @@ class ThreetPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 50),
                     child: FilledButton(
                       style: buttonStyle,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/tela5');
+
+                      },
                       child: const Text(
                         'Começar',
                         style: TextStyle(

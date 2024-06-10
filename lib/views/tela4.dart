@@ -1,126 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../styles/styles.dart';
 
 class FourthPage extends StatelessWidget {
-  const FourthPage({super.key});
+  const FourthPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController dadosnutelcpfCtrl = TextEditingController();
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+    bool isEmail(String input) {
+      final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      return emailRegExp.hasMatch(input);
+    }
+
+    bool isCPF(String input) {
+      return input.length == 9;
+    }
+
+    bool isPhone(String input) {
+      // Assuming phone number validation here
+      return input.isNotEmpty;
+    }
+
+    String validateInput(String? input) {
+      if (input == null || input.isEmpty) {
+        return 'Por favor, digite o dado correto.';
+      } else if (isEmail(input) || isCPF(input) || isPhone(input)) {
+        return 'Por favor, verifique seu e-mail com os dados enviados';
+      }
+      return '';
+    }
+
     return Scaffold(
-      backgroundColor: pink,
+      backgroundColor: Color(0xffA901F7),
       body: SingleChildScrollView(
-        //Resolver o Erro Bottom Overflowed no Flutter quando o Teclado abre
-
-        child: Column(
-          // LOGO DA LOVEPEOPLE E NOME
-          children: [
-            Container(padding: const EdgeInsets.only(top: 26),),
-            Row(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 100.0,
-                  width: 100.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(100.0), // Define o raio desejado
+        child: Container(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  padding: const EdgeInsets.only(top: 250),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Esqueceu sua Senha?',
+                          style: TextStyle(color: white, fontFamily: 'Montserrat', fontSize: 25),
+                        ),
+                        Container(padding: const EdgeInsets.only(top: 55)),
+                        Container(padding: const EdgeInsets.only(top: 35)),
+                        TextFormField(
+                          style: TextStyle(
+                            fontFamily: 'Tahoma',
+                            fontSize: 20,
+                            color: Color(0xff3101B9),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: textFormFieldDecorator('Número de telefone, email ou CPF'),
+                          controller: dadosnutelcpfCtrl,
+                          validator: validateInput,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            _formKey.currentState?.validate() == false ? 'Por favor, digite o dado correto' : '',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Container(padding: const EdgeInsets.only(top: 85)),
+                        FilledButton(
+                          style: buttonStyle,
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              print('Por favor, verifique seu e-mail com os dados enviados');
+                            }
+                          },
+                          child: const Text(
+                            'Redefinir Senha',
+                            style: TextStyle(
+                              color: white,
+                              fontFamily: 'Montserrat',
+                              fontSize: 20,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0), // Ajuste o valor conforme necessário
-                    child: Align(
-                      alignment: Alignment.centerLeft, // Alinha o widget à esquerda
-                      child: Image.asset(
-                        'assets/images/lovepeople_logo.png',
-                        height: 52,
-                      ),
-                    ),
-                  ),
-
                 ),
-                Container(
-                    height: 100,
-                    width: 250.0,
-                    child:
-                    Container(
-
-                      padding: const EdgeInsets.only(top: 50), // Ajuste o valor conforme necessário
-                      alignment: Alignment.topCenter,
-                      child: const Text(
-                        'Suas Listagens',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontSize: 20),
-                      ),
-                    )
-
-
-                ),
-              ],
-            ),
-            // FORMULARIO DE NOTAS
-            Container(
-              padding: const EdgeInsets.all(30),
-              child: Column(
-
-                children: [
-                  Container(
-                    height: 40, // Defina a altura desejada aqui
-                    decoration: BoxDecoration(
-                      color: Colors.white, // Define a cor de fundo como branco
-                      borderRadius: BorderRadius.circular(9.0), // Opcional: arredonda as bordas
-                    ),
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'Busque palavras-chave ',
-                        hintStyle: TextStyle(fontWeight: FontWeight.bold, color: Color(0xffa901f7)),
-                        border: InputBorder.none, // Remove a borda padrão do TextFormField
-                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-                        suffixIcon: Icon(Icons.search, color: Color(0xffa901f7)),
-                      ),
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-
-                  ),
-
-                  const SizedBox(height: 16.0), // Espaço entre os elementos
-
-
-
-                  const SizedBox(height: 120.0),
-
-
-                ],
-              ),
-            )
-
-
-
-
-          ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Transform.translate(
-            offset: Offset(0, -60), // move 30 pixels up
-            child: Icon(
-              CupertinoIcons.add,
-              color: Colors.white,
-              size: 90,
+          const Text(
+            'Já possuí cadastro?',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/tela1');
+            },
+            child: const Text(
+              'Clique aqui',
+              style: TextStyle(color: Colors.yellow, fontSize: 18),
             ),
           ),
         ],
       ),
-
-
     );
   }
 }

@@ -1,21 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Importe o pacote shared_preferences
 import 'package:trabalho_grupo/styles/styles.dart';
 import 'package:trabalho_grupo/widgets/cards_e_funcoes.dart';
 
 class FivePage extends StatefulWidget {
-  const FivePage({super.key});
+  const FivePage({Key? key}) : super(key: key);
 
   @override
   State<FivePage> createState() => _FivePageState();
 }
 
 class _FivePageState extends State<FivePage> {
-  List<Lista> listagem = [];
 
-//! Metodo parara apagar o card.
+
+  List<Lista> listagem = [];
+  List<Lista> lixeira = [];
+  List<Lista> listagemFiltrada = [];
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    loadListagem(); // Carregar dados ao iniciar a tela
+    searchController.addListener(_onSearchIconTapped);
+  }
+
+  void _onSearchIconTapped() {
+    String query = searchController.text.toLowerCase();
+    setState(() {
+      listagemFiltrada = listagem
+          .where((item) =>
+      item.titulo.toLowerCase().contains(query) ||
+          item.descricao.toLowerCase().contains(query))
+          .toList();
+    });
+  }
+
+  void loadListagem() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? listagemString = prefs.getString('listagem');
+    if (listagemString != null) {
+      setState(() {
+        listagem = Lista.decode(listagemString);
+        listagemFiltrada = listagem;
+      });
+    }
+  }
+
+  void saveListagem() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String encodedListagem = Lista.encode(listagem);
+    prefs.setString('listagem', encodedListagem);
+  }
+
   void apagarCard(int index) {
     setState(() {
       listagem.removeAt(index);
+      _onSearchIconTapped();
+      saveListagem(); // Salvar os dados após apagar um card
     });
   }
 
@@ -30,7 +72,6 @@ class _FivePageState extends State<FivePage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
-//! Layout da logo.
                   children: [
                     Container(
                       width: 100,
@@ -43,7 +84,6 @@ class _FivePageState extends State<FivePage> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 12, bottom: 10),
-//! Botão Navigator => "/Tela Anterior".
                         child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
@@ -58,7 +98,6 @@ class _FivePageState extends State<FivePage> {
                         ),
                       ),
                     ),
-//! Layout do titulo da pagina.
                     Container(
                       height: 100,
                       width: 240,
@@ -74,7 +113,6 @@ class _FivePageState extends State<FivePage> {
                   ],
                 ),
               ),
-//! Layout do campo de pesquisa.
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
                 child: Container(
@@ -82,26 +120,26 @@ class _FivePageState extends State<FivePage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
                   child: TextFormField(
-                    decoration:
-                        textFormFieldDecoratorPage5('Busque palavra-chave'),
+                    controller: searchController,
+                    decoration: textFormFieldDecoratorPage5(
+                        "Busque palavras-chave", _onSearchIconTapped),
                   ),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              //! Builder para gerar os Cards e suas funções.
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: SizedBox(
                   height: 540,
                   child: ListView.builder(
-                    itemCount: listagem.length,
+                    itemCount: listagemFiltrada.length,
                     itemBuilder: (context, index) {
                       return Cards(
-                        title: listagem[index].titulo,
-                        subtitle: listagem[index].descricao,
-                        color: listagem[index].cores,
+                        title: listagemFiltrada[index].titulo,
+                        subtitle: listagemFiltrada[index].descricao,
+                        color: listagemFiltrada[index].cores,
                         deletar: () {
                           apagarCard(index);
                         },
@@ -110,7 +148,6 @@ class _FivePageState extends State<FivePage> {
                   ),
                 ),
               ),
-              //! Botão Navigator => /tela6.
               Padding(
                 padding: const EdgeInsets.only(top: 1.0),
                 child: ElevatedButton(
@@ -119,6 +156,8 @@ class _FivePageState extends State<FivePage> {
                         if (novoValor != null) {
                           setState(() {
                             listagem.add(novoValor as Lista);
+                            _onSearchIconTapped();
+                            saveListagem(); // Salvar os dados ao adicionar um novo card
                           });
                         }
                       });
