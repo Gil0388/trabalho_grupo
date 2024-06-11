@@ -20,8 +20,11 @@ InputDecoration textFormFieldDecorator(String hintText) {
     filled: true,
     fillColor: white,
     hintText: hintText,
-    hintStyle:
-        const TextStyle(color: purple, fontFamily: 'Tahoma', fontSize: 14),
+    hintStyle: const TextStyle(
+        color: purple,
+        fontFamily: 'Tahoma',
+        fontSize: 14,
+        fontWeight: FontWeight.bold),
     errorStyle: const TextStyle(color: white),
     border: const OutlineInputBorder(
       borderSide: BorderSide.none,
@@ -34,12 +37,14 @@ InputDecoration textFormFieldDecorator(String hintText) {
   );
 }
 
-InputDecoration textFormFieldDecoratorPage5(String labelText, VoidCallback onIconTapped) {
+InputDecoration textFormFieldDecoratorPage5(
+    String labelText, VoidCallback onIconTapped) {
   return InputDecoration(
     labelText: labelText,
     labelStyle: const TextStyle(fontFamily: 'Montserrat', color: Colors.purple),
     border: InputBorder.none,
-    contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+    contentPadding:
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
     suffixIcon: GestureDetector(
       onTap: onIconTapped,
       child: const Icon(Icons.search, color: Colors.purple),
@@ -57,3 +62,6 @@ ButtonStyle buttonStyle = ButtonStyle(
       side: const BorderSide(color: Colors.white),
       borderRadius: BorderRadius.circular(10))),
 );
+
+const SizedBox bigSpacer = SizedBox(height: 30);
+const SizedBox mediumSpacer = SizedBox(height: 10);

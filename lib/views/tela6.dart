@@ -19,8 +19,6 @@ class _SixthPageState extends State<SixthPage> {
   // Variável que guarda a cor do Card.
   Color? selectedColor;
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +26,8 @@ class _SixthPageState extends State<SixthPage> {
         backgroundColor: pink,
         body: SingleChildScrollView(
           // Resolver o Erro Bottom Overflowed no Flutter quando o Teclado abre
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             // LOGO DA LOVEPEOPLE E NOME
             children: [
@@ -41,7 +40,8 @@ class _SixthPageState extends State<SixthPage> {
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(100.0), // Define o raio desejado
+                        bottomRight:
+                            Radius.circular(100.0), // Define o raio desejado
                       ),
                     ),
                     child: Padding(
@@ -52,7 +52,8 @@ class _SixthPageState extends State<SixthPage> {
                           Navigator.pop(context);
                         },
                         child: Align(
-                          alignment: Alignment.centerLeft, // Alinha o widget à esquerda
+                          alignment: Alignment
+                              .centerLeft, // Alinha o widget à esquerda
                           child: Image.asset(
                             'assets/images/lovepeople_logo.png',
                             height: 52,
@@ -65,7 +66,8 @@ class _SixthPageState extends State<SixthPage> {
                     height: 100,
                     width: 250.0,
                     child: Container(
-                      padding: const EdgeInsets.only(top: 50), // Ajuste o valor conforme necessário
+                      padding: const EdgeInsets.only(
+                          top: 50), // Ajuste o valor conforme necessário
                       alignment: Alignment.topCenter,
                       child: const Text(
                         'Nova Tarefa',
@@ -90,8 +92,10 @@ class _SixthPageState extends State<SixthPage> {
                       Container(
                         height: 40, // Defina a altura desejada aqui
                         decoration: BoxDecoration(
-                          color: Colors.white, // Define a cor de fundo como branco
-                          borderRadius: BorderRadius.circular(9.0), // Opcional: arredonda as bordas
+                          color:
+                              Colors.white, // Define a cor de fundo como branco
+                          borderRadius: BorderRadius.circular(
+                              9.0), // Opcional: arredonda as bordas
                         ),
                         child: TextFormField(
                           controller: tituloCtrll,
@@ -104,7 +108,8 @@ class _SixthPageState extends State<SixthPage> {
                               fontWeight: FontWeight.bold,
                               color: Color(0xffa901f7),
                             ),
-                            border: InputBorder.none, // Remove a borda padrão do TextFormField
+                            border: InputBorder
+                                .none, // Remove a borda padrão do TextFormField
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 10.0,
                               horizontal: 16.0,
@@ -119,8 +124,10 @@ class _SixthPageState extends State<SixthPage> {
                       Container(
                         height: 280, // Defina a altura desejada aqui
                         decoration: BoxDecoration(
-                          color: Colors.white, // Define a cor de fundo como branco
-                          borderRadius: BorderRadius.circular(8.0), // Opcional: arredonda as bordas
+                          color:
+                              Colors.white, // Define a cor de fundo como branco
+                          borderRadius: BorderRadius.circular(
+                              8.0), // Opcional: arredonda as bordas
                         ),
                         child: TextField(
                           controller: descricaoCtrll,
@@ -130,11 +137,15 @@ class _SixthPageState extends State<SixthPage> {
                           decoration: const InputDecoration(
                             hintText: 'Escreva uma descrição para sua tarefa.',
                             hintStyle: TextStyle(color: Color(0xFF909ba2)),
-                            border: InputBorder.none, // Remove a borda padrão do TextFormField
-                            contentPadding: EdgeInsets.symmetric(horizontal: 16.0), // Adiciona preenchimento interno
+                            border: InputBorder
+                                .none, // Remove a borda padrão do TextFormField
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal:
+                                    16.0), // Adiciona preenchimento interno
                           ),
                           keyboardType: TextInputType.multiline,
-                          maxLines: null, // Permite múltiplas linhas e quebra de linha
+                          maxLines:
+                              null, // Permite múltiplas linhas e quebra de linha
                         ),
                       ),
                       const SizedBox(height: 50.0),
@@ -148,11 +159,12 @@ class _SixthPageState extends State<SixthPage> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               backgroundColor: yellowLight,
                               padding: const EdgeInsets.all(15),
                               side: selectedColor == yellowLight
-                                  ? BorderSide(color: Colors.black, width: 2)
+                                  ? const BorderSide(
+                                      color: Colors.black, width: 2)
                                   : BorderSide.none,
                             ),
                             child: const Text(''),
@@ -164,11 +176,12 @@ class _SixthPageState extends State<SixthPage> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               backgroundColor: pinkLight,
                               padding: const EdgeInsets.all(15),
                               side: selectedColor == pinkLight
-                                  ? BorderSide(color: Colors.black, width: 2)
+                                  ? const BorderSide(
+                                      color: Colors.black, width: 2)
                                   : BorderSide.none,
                             ),
                             child: const Text(''),
@@ -180,11 +193,12 @@ class _SixthPageState extends State<SixthPage> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               backgroundColor: purpleLight,
                               padding: const EdgeInsets.all(15),
                               side: selectedColor == purpleLight
-                                  ? BorderSide(color: Colors.black, width: 2)
+                                  ? const BorderSide(
+                                      color: Colors.black, width: 2)
                                   : BorderSide.none,
                             ),
                             child: const Text(''),
@@ -196,11 +210,12 @@ class _SixthPageState extends State<SixthPage> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               backgroundColor: blueLight,
                               padding: const EdgeInsets.all(15),
                               side: selectedColor == blueLight
-                                  ? BorderSide(color: Colors.black, width: 2)
+                                  ? const BorderSide(
+                                      color: Colors.black, width: 2)
                                   : BorderSide.none,
                             ),
                             child: const Text(''),
@@ -212,11 +227,12 @@ class _SixthPageState extends State<SixthPage> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               backgroundColor: greenLight,
                               padding: const EdgeInsets.all(15),
                               side: selectedColor == greenLight
-                                  ? BorderSide(color: Colors.black, width: 2)
+                                  ? const BorderSide(
+                                      color: Colors.black, width: 2)
                                   : BorderSide.none,
                             ),
                             child: const Text(''),
@@ -229,7 +245,6 @@ class _SixthPageState extends State<SixthPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-
                               Navigator.pushNamed(context, '/tela5');
                             },
                             child: const Icon(
