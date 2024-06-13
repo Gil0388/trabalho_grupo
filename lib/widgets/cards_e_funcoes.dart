@@ -23,7 +23,7 @@ class Cards extends StatelessWidget {
         title: Text(title),
         subtitle: Text(subtitle),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: () {
             _showDeleteConfirmationDialog(context);
           },
@@ -37,21 +37,21 @@ class Cards extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Deseja deletar este item?'),
+          title: const Text('Deseja deletar este item?'),
           content: Text("\"$title\" será removido para a lixeira."),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancelar"),
+              child: const Text("Cancelar"),
             ),
             TextButton(
               onPressed: () {
                 deletar();
                 Navigator.of(context).pop();
               },
-              child: Text("Confirmar"),
+              child: const Text("Confirmar"),
             ),
           ],
         );
@@ -72,11 +72,13 @@ class Lista {
   });
 
   static String encode(List<Lista> listagem) {
-    List<Map<String, dynamic>> mapList = listagem.map((item) => {
-      'titulo': item.titulo,
-      'descricao': item.descricao,
-      'cores': item.cores?.value,
-    }).toList();
+    List<Map<String, dynamic>> mapList = listagem
+        .map((item) => {
+              'titulo': item.titulo,
+              'descricao': item.descricao,
+              'cores': item.cores?.value,
+            })
+        .toList();
     return json.encode(mapList);
   }
 
@@ -116,8 +118,8 @@ class _FivePageState extends State<FivePage> {
     setState(() {
       listagemFiltrada = listagem
           .where((item) =>
-      item.titulo.toLowerCase().contains(query) ||
-          item.descricao.toLowerCase().contains(query))
+              item.titulo.toLowerCase().contains(query) ||
+              item.descricao.toLowerCase().contains(query))
           .toList();
     });
   }
@@ -212,7 +214,7 @@ class _FivePageState extends State<FivePage> {
                   ),
                   child: TextFormField(
                     controller: searchController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Busque palavras-chave",
                       prefixIcon: Icon(Icons.search),
                     ),
@@ -268,7 +270,7 @@ class _FivePageState extends State<FivePage> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: FivePage(),
   ));
 }

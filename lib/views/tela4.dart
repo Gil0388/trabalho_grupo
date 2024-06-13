@@ -34,14 +34,14 @@ class FourthPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xffA901F7),
+      backgroundColor: const Color(0xffA901F7),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.only(top: 35),
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
                   padding: const EdgeInsets.only(top: 250),
                   child: Form(
@@ -50,18 +50,22 @@ class FourthPage extends StatelessWidget {
                       children: [
                         const Text(
                           'Esqueceu sua Senha?',
-                          style: TextStyle(color: white, fontFamily: 'Montserrat', fontSize: 25),
+                          style: TextStyle(
+                              color: white,
+                              fontFamily: 'Montserrat',
+                              fontSize: 25),
                         ),
                         Container(padding: const EdgeInsets.only(top: 55)),
                         Container(padding: const EdgeInsets.only(top: 35)),
                         TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Tahoma',
                             fontSize: 20,
                             color: Color(0xff3101B9),
                             fontWeight: FontWeight.bold,
                           ),
-                          decoration: textFormFieldDecorator('Número de telefone, email ou CPF'),
+                          decoration: textFormFieldDecorator(
+                              'Número de telefone, email ou CPF'),
                           controller: dadosnutelcpfCtrl,
                           validator: validateInput,
                         ),
@@ -69,8 +73,10 @@ class FourthPage extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            _formKey.currentState?.validate() == false ? 'Por favor, digite o dado correto' : '',
-                            style: TextStyle(
+                            _formKey.currentState?.validate() == false
+                                ? 'Por favor, digite o dado correto'
+                                : '',
+                            style: const TextStyle(
                               color: Colors.red,
                               fontSize: 14,
                             ),
@@ -81,7 +87,8 @@ class FourthPage extends StatelessWidget {
                           style: buttonStyle,
                           onPressed: () {
                             if (_formKey.currentState?.validate() ?? false) {
-                              print('Por favor, verifique seu e-mail com os dados enviados');
+                              // print(
+                              //     'Por favor, verifique seu e-mail com os dados enviados');
                             }
                           },
                           child: const Text(
