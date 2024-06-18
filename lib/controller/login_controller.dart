@@ -21,10 +21,16 @@ class LoginController extends ChangeNotifier {
     }).catchError((e) => onError());
   }
 
-  bool showError = false;
-
-  void changeError(bool showHide) {
-    showError = showHide;
-    notifyListeners();
+  void doSignUp({
+    required String username,
+    required String email,
+    required String password,
+    required Function() onSuccess,
+    required Function() onError,
+  }) {
+    userRepository
+        .doSignUp(username: username, email: email, password: password)
+        .then((session) => onSuccess())
+        .catchError((e) => onError());
   }
 }

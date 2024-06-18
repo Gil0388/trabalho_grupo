@@ -8,12 +8,12 @@ class Cards extends StatelessWidget {
   final VoidCallback deletar;
 
   const Cards({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.color,
     required this.deletar,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class Lista {
 }
 
 class FivePage extends StatefulWidget {
-  const FivePage({Key? key}) : super(key: key);
+  const FivePage({super.key});
 
   @override
   State<FivePage> createState() => _FivePageState();

@@ -28,15 +28,6 @@ class _FirstPageState extends State<LoginPage> {
 
     _loginController = context.read<LoginController>();
 
-    void onSuccess() {
-      print('Success');
-      Navigator.pushNamed(context, '/tela5');
-    }
-
-    void onError() {
-      print('Error');
-    }
-
     return ListenableBuilder(
       listenable: _loginController,
       builder: (context, child) {
@@ -136,10 +127,18 @@ class _FirstPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           // _loginController.changeError(false);
                           _loginController.doSignIn(
-                              email: usernameCtrl.text,
-                              password: passwordCtrl.text,
-                              onSuccess: onSuccess,
-                              onError: onError);
+                            email: usernameCtrl.text,
+                            password: passwordCtrl.text,
+                            onSuccess: () {
+                              Navigator.pushNamed(context, '/tela5');
+                            },
+                            onError: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Login ou Senha incorreta, por favor tentar novamente')));
+                            },
+                          );
                         }
                       },
                       child: const Text(
@@ -151,14 +150,6 @@ class _FirstPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    Visibility(
-                      visible: _loginController.showError,
-                      child: const Text(
-                        'Login ou Senha incorreta, por favor tentar novamente',
-                        style: TextStyle(
-                            color: yellow, fontSize: 12, fontFamily: 'Tahoma'),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -182,7 +173,7 @@ class _FirstPageState extends State<LoginPage> {
                         TextButton(
                           //inclusão da rota cadastro 09/06/2024
                           onPressed: () {
-                            Navigator.pushNamed(context, '/tela2');
+                            Navigator.pushNamed(context, '/SignUp');
                           },
                           child: const Text(
                             'Clique aqui',
