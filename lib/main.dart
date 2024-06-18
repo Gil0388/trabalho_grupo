@@ -7,7 +7,7 @@ import 'package:trabalho_grupo/data/user_repository.dart';
 
 import 'package:trabalho_grupo/views/login_page.dart';
 import 'package:trabalho_grupo/views/tela3.dart';
-import 'package:trabalho_grupo/views/tela2.dart';
+import 'package:trabalho_grupo/views/sing_up_page.dart';
 import 'package:trabalho_grupo/views/tela4.dart';
 import 'package:trabalho_grupo/views/tela5.dart';
 import 'package:trabalho_grupo/views/tela6.dart';
@@ -39,7 +39,11 @@ class MyApp extends StatelessWidget {
                   sessionDatasource: SessionDatasource()),
               builder: (context, child) => const LoginPage(),
             ),
-        '/Cadastro': (context) => const SecondPage(),
+        '/SignUp': (context) => ChangeNotifierProvider(
+            create: (context) => LoginController(
+                userRepository: UserRepository(DioClient.create()),
+                sessionDatasource: sessionDatasource),
+            builder: (context, child) => const SignUpPage()),
         '/CadastroConcluido': (context) => const ThreetPage(),
         '/tela4': (context) => const FourthPage(),
         '/tela5': (context) => const FivePage(),

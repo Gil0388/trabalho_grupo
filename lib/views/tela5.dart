@@ -4,7 +4,7 @@ import 'package:trabalho_grupo/styles/styles.dart';
 import 'package:trabalho_grupo/widgets/cards_e_funcoes.dart';
 
 class FivePage extends StatefulWidget {
-  const FivePage({Key? key}) : super(key: key);
+  const FivePage({super.key});
 
   @override
   State<FivePage> createState() => _FivePageState();

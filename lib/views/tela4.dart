@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../styles/styles.dart';
 
 class FourthPage extends StatelessWidget {
-  const FourthPage({Key? key});
+  const FourthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController dadosnutelcpfCtrl = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     bool isEmail(String input) {
       final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -45,7 +45,7 @@ class FourthPage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(top: 250),
                   child: Form(
-                    key: _formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         const Text(
@@ -73,7 +73,7 @@ class FourthPage extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            _formKey.currentState?.validate() == false
+                            formKey.currentState?.validate() == false
                                 ? 'Por favor, digite o dado correto'
                                 : '',
                             style: const TextStyle(
@@ -86,7 +86,7 @@ class FourthPage extends StatelessWidget {
                         FilledButton(
                           style: buttonStyle,
                           onPressed: () {
-                            if (_formKey.currentState?.validate() ?? false) {
+                            if (formKey.currentState?.validate() ?? false) {
                               // print(
                               //     'Por favor, verifique seu e-mail com os dados enviados');
                             }
