@@ -14,11 +14,15 @@ class LoginController extends ChangeNotifier {
       {required String email,
       required String password,
       required Function() onSuccess,
-      required Function() onError}) {
-    userRepository.doSignIn(email: email, password: password).then((session) {
-      // sessionDatasource.saveSession(session);
-      return onSuccess();
-    }).catchError((e) => onError());
+      required Function() onError}) async {
+    final response =
+        await userRepository.doSignIn(email: email, password: password);
+    try {
+      sessionDatasource.saveSession(response);
+      onSuccess();
+    } catch (e) {
+      onError();
+    }
   }
 
   void doSignUp({
