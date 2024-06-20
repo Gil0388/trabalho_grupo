@@ -14,15 +14,19 @@ class UserRepository {
     required String email,
     required String password,
   }) async {
-    return dio.post(
+    final response = await dio.post(
       signPath,
       data: {
         'identifier': email,
         'password': password,
       },
-    ).then((value) {
-      return SignInResponse.fromMap(value.data);
-    }).catchError((e) => e);
+    );
+
+    try {
+      return SignInResponse.fromMap(response.data);
+    } catch (e) {
+      return throw Exception(e);
+    }
   }
 
   Future<SignUpResponse> doSignUp(

@@ -1,9 +1,11 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:trabalho_grupo/controller/login_controller.dart';
+import 'package:trabalho_grupo/core/dio_client.dart';
+import 'package:trabalho_grupo/data/user_repository.dart';
 
+import '../main.dart';
 import '../styles/styles.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,11 +24,17 @@ class _FirstPageState extends State<LoginPage> {
   bool showError = false;
 
   @override
+  void initState() {
+    super.initState();
+    _loginController = LoginController(
+        userRepository: UserRepository(DioClient.create()),
+        sessionDatasource: sessionDatasource);
+  }
+
+  @override
   Widget build(BuildContext context) {
     double topContainerHeight = MediaQuery.of(context).size.width / 2;
     Radius radius = Radius.circular(topContainerHeight);
-
-    _loginController = context.read<LoginController>();
 
     return ListenableBuilder(
       listenable: _loginController,
