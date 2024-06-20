@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Importe o pacote shared_preferences
+import 'package:trabalho_grupo/controller/todos_controller.dart';
+import 'package:trabalho_grupo/core/dio_client.dart';
+import 'package:trabalho_grupo/data/model/todo_repository.dart';
+import 'package:trabalho_grupo/main.dart';
 import 'package:trabalho_grupo/styles/styles.dart';
 import 'package:trabalho_grupo/widgets/cards_e_funcoes.dart';
 
@@ -11,8 +14,7 @@ class FivePage extends StatefulWidget {
 }
 
 class _FivePageState extends State<FivePage> {
-
-
+  late TodosController controller;
   List<Lista> listagem = [];
   List<Lista> lixeira = [];
   List<Lista> listagemFiltrada = [];
@@ -20,44 +22,32 @@ class _FivePageState extends State<FivePage> {
 
   @override
   void initState() {
+    controller = TodosController(
+      todoRepository: TodoRepository(
+        DioClient.create(),
+        sessionDatasource,
+      ),
+      sessionDatasource: sessionDatasource,
+    );
+    controller.getTodoList();
     super.initState();
-    loadListagem(); // Carregar dados ao iniciar a tela
-    searchController.addListener(_onSearchIconTapped);
   }
 
-  void _onSearchIconTapped() {
+  void onSearchIconTapped() {
     String query = searchController.text.toLowerCase();
     setState(() {
       listagemFiltrada = listagem
           .where((item) =>
-      item.titulo.toLowerCase().contains(query) ||
-          item.descricao.toLowerCase().contains(query))
+              item.titulo.toLowerCase().contains(query) ||
+              item.descricao.toLowerCase().contains(query))
           .toList();
     });
-  }
-
-  void loadListagem() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? listagemString = prefs.getString('listagem');
-    if (listagemString != null) {
-      setState(() {
-        listagem = Lista.decode(listagemString);
-        listagemFiltrada = listagem;
-      });
-    }
-  }
-
-  void saveListagem() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String encodedListagem = Lista.encode(listagem);
-    prefs.setString('listagem', encodedListagem);
   }
 
   void apagarCard(int index) {
     setState(() {
       listagem.removeAt(index);
-      _onSearchIconTapped();
-      saveListagem(); // Salvar os dados após apagar um card
+      onSearchIconTapped();
     });
   }
 
@@ -122,7 +112,7 @@ class _FivePageState extends State<FivePage> {
                   child: TextFormField(
                     controller: searchController,
                     decoration: textFormFieldDecoratorPage5(
-                        "Busque palavras-chave", _onSearchIconTapped),
+                        "Busque palavras-chave", onSearchIconTapped),
                   ),
                 ),
               ),
@@ -133,19 +123,25 @@ class _FivePageState extends State<FivePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: SizedBox(
                   height: 540,
-                  child: ListView.builder(
-                    itemCount: listagemFiltrada.length,
-                    itemBuilder: (context, index) {
-                      return Cards(
-                        title: listagemFiltrada[index].titulo,
-                        subtitle: listagemFiltrada[index].descricao,
-                        color: listagemFiltrada[index].cores,
-                        deletar: () {
-                          apagarCard(index);
-                        },
-                      );
-                    },
-                  ),
+                  child: ListenableBuilder(
+                      listenable: controller,
+                      builder: (context, child) {
+                        return ListView.builder(
+                          itemCount: controller.todoList.length,
+                          itemBuilder: (context, index) {
+                            final todo = controller.todoList[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                child: ListTile(
+                                  title: Text(todo.title),
+                                  subtitle: Text(todo.description),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }),
                 ),
               ),
               Padding(
@@ -156,8 +152,7 @@ class _FivePageState extends State<FivePage> {
                         if (novoValor != null) {
                           setState(() {
                             listagem.add(novoValor as Lista);
-                            _onSearchIconTapped();
-                            saveListagem(); // Salvar os dados ao adicionar um novo card
+                            onSearchIconTapped();
                           });
                         }
                       });

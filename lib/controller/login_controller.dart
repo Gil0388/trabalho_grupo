@@ -16,7 +16,7 @@ class LoginController extends ChangeNotifier {
       required Function() onSuccess,
       required Function() onError}) {
     userRepository.doSignIn(email: email, password: password).then((session) {
-      // sessionDatasource.saveSession(session);
+     sessionDatasource.saveSession(session);
       return onSuccess();
     }).catchError((e) => onError());
   }

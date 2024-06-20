@@ -9,7 +9,7 @@ import 'package:trabalho_grupo/views/login_page.dart';
 import 'package:trabalho_grupo/views/tela3.dart';
 import 'package:trabalho_grupo/views/sing_up_page.dart';
 import 'package:trabalho_grupo/views/tela4.dart';
-import 'package:trabalho_grupo/views/tela5.dart';
+import 'package:trabalho_grupo/views/list_page.dart';
 import 'package:trabalho_grupo/views/tela6.dart';
 
 const baseUrl = 'https://todo.rafaelbarbosatec.com/api/';
