@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:trabalho_grupo/controller/login_controller.dart';
-import 'package:trabalho_grupo/core/dio_client.dart';
 import 'package:trabalho_grupo/data/local/session_datasource.dart';
-import 'package:trabalho_grupo/data/user_repository.dart';
 
 import 'package:trabalho_grupo/views/login_page.dart';
 import 'package:trabalho_grupo/views/tela3.dart';
-import 'package:trabalho_grupo/views/sing_up_page.dart';
+import 'package:trabalho_grupo/views/sign_up_page.dart';
 import 'package:trabalho_grupo/views/tela4.dart';
 import 'package:trabalho_grupo/views/list_page.dart';
 import 'package:trabalho_grupo/views/tela6.dart';
@@ -33,17 +29,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/Login': (context) => ChangeNotifierProvider(
-              create: (context) => LoginController(
-                  userRepository: UserRepository(DioClient.create()),
-                  sessionDatasource: SessionDatasource()),
-              builder: (context, child) => const LoginPage(),
-            ),
-        '/SignUp': (context) => ChangeNotifierProvider(
-            create: (context) => LoginController(
-                userRepository: UserRepository(DioClient.create()),
-                sessionDatasource: sessionDatasource),
-            builder: (context, child) => const SignUpPage()),
+        '/Login': (context) => const LoginPage(),
+        '/SignUp': (context) => const SignUpPage(),
         '/CadastroConcluido': (context) => const ThreetPage(),
         '/tela4': (context) => const FourthPage(),
         '/tela5': (context) => const FivePage(),

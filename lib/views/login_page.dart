@@ -1,11 +1,16 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:trabalho_grupo/controller/login_controller.dart';
 import 'package:trabalho_grupo/controller/todos_controller.dart';
 import 'package:trabalho_grupo/core/dio_client.dart';
 import 'package:trabalho_grupo/data/model/todo_repository.dart';
 import 'package:trabalho_grupo/main.dart';
+import 'package:trabalho_grupo/core/dio_client.dart';
+import 'package:trabalho_grupo/data/user_repository.dart';
+
+import '../main.dart';
 import '../styles/styles.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,8 +45,6 @@ class _FirstPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     double topContainerHeight = MediaQuery.of(context).size.width / 2;
     Radius radius = Radius.circular(topContainerHeight);
-
-    _loginController = context.read<LoginController>();
 
     return ListenableBuilder(
       listenable: _loginController,
@@ -145,7 +148,7 @@ class _FirstPageState extends State<LoginPage> {
                             email: usernameCtrl.text,
                             password: passwordCtrl.text,
                             onSuccess: () {
-                              Navigator.pushNamed(context, '/tela5');
+                              Navigator.pushNamed(context, '/l');
                             },
                             onError: () {
                               ScaffoldMessenger.of(context).showSnackBar(
