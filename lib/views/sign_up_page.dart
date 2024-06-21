@@ -2,10 +2,10 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trabalho_grupo/core/dio_client.dart';
+import 'package:trabalho_grupo/data/local/session_datasource.dart';
 import 'package:trabalho_grupo/data/user_repository.dart';
 
 import '../controller/login_controller.dart';
-import '../main.dart';
 import '../styles/styles.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -21,6 +21,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordCtrl = TextEditingController();
   TextEditingController confirmPasswordCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
+  final  sessionDataSource = SessionDatasource();
+
 
   late LoginController _loginController;
   @override
@@ -28,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.initState();
     _loginController = LoginController(
         userRepository: UserRepository(DioClient.create()),
-        sessionDatasource: sessionDatasource);
+        sessionDatasource: sessionDataSource);
   }
 
   @override

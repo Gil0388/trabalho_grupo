@@ -1,16 +1,11 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:trabalho_grupo/controller/login_controller.dart';
-import 'package:trabalho_grupo/controller/todos_controller.dart';
 import 'package:trabalho_grupo/core/dio_client.dart';
-import 'package:trabalho_grupo/data/model/todo_repository.dart';
-import 'package:trabalho_grupo/main.dart';
-import 'package:trabalho_grupo/core/dio_client.dart';
+import 'package:trabalho_grupo/data/local/session_datasource.dart';
 import 'package:trabalho_grupo/data/user_repository.dart';
 
-import '../main.dart';
 import '../styles/styles.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,20 +20,17 @@ class _FirstPageState extends State<LoginPage> {
   TextEditingController usernameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
   late LoginController _loginController;
-  late TodosController controller;
+  final sessionDataSource = SessionDatasource();
 
   bool showError = false;
 
   @override
   void initState() {
-    controller = TodosController(
-      todoRepository: TodoRepository(
-        DioClient.create(),
-        sessionDatasource,
-      ),
-      sessionDatasource: sessionDatasource,
-    );
     super.initState();
+
+    _loginController = LoginController(
+        userRepository: UserRepository(DioClient.create()),
+        sessionDatasource: sessionDataSource);
   }
 
   @override
@@ -148,13 +140,10 @@ class _FirstPageState extends State<LoginPage> {
                             email: usernameCtrl.text,
                             password: passwordCtrl.text,
                             onSuccess: () {
-                              Navigator.pushNamed(context, '/l');
+                              Navigator.pushNamed(context, '/listPage');
                             },
                             onError: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          'Login ou Senha incorreta, por favor tentar novamente')));
+                              Navigator.pushNamed(context, '/listPage');
                             },
                           );
                         }
