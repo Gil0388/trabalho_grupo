@@ -32,6 +32,7 @@ InputDecoration textFormFieldDecorator(String hintText) {
         Radius.circular(10),
       ),
     ),
+    suffixIcon: const Icon(null),
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
   );

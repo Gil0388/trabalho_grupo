@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-import 'package:trabalho_grupo/data/model/sign_up_response.dart';
 import 'package:trabalho_grupo/data/model/sign_in_response.dart';
 
 class UserRepository {
@@ -29,16 +28,17 @@ class UserRepository {
     }
   }
 
-  Future<SignUpResponse> doSignUp(
+  Future<SignInResponse> doSignUp(
       {required String username,
       required String email,
       required String password}) async {
-    return dio.post(cadastroPath, data: {
-      'username': username,
-      'email': email,
-      'password': password
-    }).then((value) {
-      return SignUpResponse.fromMap(value.data);
-    }).catchError((e) => e);
+    final response = await dio.post(cadastroPath,
+        data: {'username': username, 'email': email, 'password': password});
+
+    try {
+      return SignInResponse.fromMap(response.data);
+    } catch (e) {
+      return throw Exception(e);
+    }
   }
 }
