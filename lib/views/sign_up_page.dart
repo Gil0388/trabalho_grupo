@@ -1,6 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:trabalho_grupo/core/dio_client.dart';
 import 'package:trabalho_grupo/data/user_repository.dart';
 
@@ -33,7 +33,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    _loginController = context.read<LoginController>();
     return Scaffold(
       backgroundColor: pink,
       resizeToAvoidBottomInset: false,
@@ -45,8 +44,6 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // FORMULARIO DE LOGIN
-
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(
@@ -76,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: emailCtrl,
                           validator: (email) {
                             if (email == null || email.isEmpty) {
-                              return 'Please provide a valid username';
+                              return 'Please provide a valid email';
                             }
                             return null;
                           },
@@ -88,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: passwordCtrl,
                           validator: (password) {
                             if (password == null || password.isEmpty) {
-                              return 'Please provide a valid username';
+                              return 'Please provide a valid password';
                             } else if (passwordCtrl.text !=
                                 confirmPasswordCtrl.text) {
                               return 'The password does not match';
@@ -103,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           obscureText: true,
                           validator: (password) {
                             if (password == null || password.isEmpty) {
-                              return 'Please provide a valid username';
+                              return 'Please provide a valid password';
                             }
                             return null;
                           },
@@ -119,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 password: passwordCtrl.text,
                                 onSuccess: () {
                                   Navigator.pushNamed(
-                                      context, '/CadastroConcluido');
+                                      context, '/SignUpSuccess');
                                 },
                                 onError: () {
                                   ScaffoldMessenger.of(context).showSnackBar(

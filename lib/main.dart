@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trabalho_grupo/data/local/session_datasource.dart';
 
 import 'package:trabalho_grupo/views/login_page.dart';
-import 'package:trabalho_grupo/views/tela3.dart';
+import 'package:trabalho_grupo/views/sign_up_success.dart';
 import 'package:trabalho_grupo/views/sign_up_page.dart';
 import 'package:trabalho_grupo/views/tela4.dart';
 import 'package:trabalho_grupo/views/tela5.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/Login': (context) => const LoginPage(),
         '/SignUp': (context) => const SignUpPage(),
-        '/CadastroConcluido': (context) => const ThreetPage(),
+        '/SignUpSuccess': (context) => const SignUpSuccessPage(),
         '/tela4': (context) => const FourthPage(),
         '/tela5': (context) => const FivePage(),
         '/tela6': (context) => const SixthPage(),
