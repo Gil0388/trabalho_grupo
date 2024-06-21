@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:trabalho_grupo/widgets/cards_e_funcoes.dart';
+import 'package:trabalho_grupo/data/model/todo_model.dart';
 import '../styles/styles.dart';
 
 class SixthPage extends StatefulWidget {
@@ -259,7 +259,8 @@ class _SixthPageState extends State<SixthPage> {
                               if (_acesso.currentState!.validate()) {
                                 Navigator.pop(
                                   context,
-                                  Lista(
+                                  TodoModel(
+                                    id: 0,
                                     titulo: tituloCtrll.text,
                                     descricao: descricaoCtrll.text,
                                     cores: selectedColor,
