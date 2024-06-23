@@ -42,13 +42,13 @@ InputDecoration textFormFieldDecoratorPage5(
     String labelText, VoidCallback onIconTapped) {
   return InputDecoration(
     labelText: labelText,
-    labelStyle: const TextStyle(fontFamily: 'Montserrat', color: Colors.purple),
+    labelStyle: const TextStyle(fontFamily: 'Montserrat', color: purple),
     border: InputBorder.none,
     contentPadding:
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
     suffixIcon: GestureDetector(
       onTap: onIconTapped,
-      child: const Icon(Icons.search, color: Colors.purple),
+      child: const Icon(Icons.search, color: purple),
     ),
   );
 }

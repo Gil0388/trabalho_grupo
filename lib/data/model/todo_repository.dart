@@ -48,4 +48,15 @@ Future postTodo() async {
         });
   }
 
+  Future deleteTodo(int id) async {
+    final session = sessionDatasource.getSession();
+    await dio.delete(
+      "$todosPath/$id",
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer ${session?.jwt}',
+        },
+      ),
+    );
+  }
 }

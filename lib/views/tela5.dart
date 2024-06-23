@@ -24,6 +24,48 @@ class _FivePageState extends State<ListPage> {
     super.initState();
   }
 
+//! Coloquei aqui o metodo que vai chamar a função de deletar.
+  void deleteConfirmation(int id, String titulo) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "Deseja deletar este item?",
+            style: TextStyle(
+                color: purple, fontSize: 20, fontFamily: 'Montserrat'),
+          ),
+          content: Text(
+            "\"$titulo\" será movido para a lixeira.",
+            style: const TextStyle(
+                color: purple, fontSize: 15, fontFamily: 'Montserrat'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Confirmar",
+                style: TextStyle(color: purple, fontFamily: 'Montserrat'),
+              ),
+              onPressed: () {
+                controller.apagarCard(id);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                "Cancelar",
+                style: TextStyle(color: pink, fontFamily: 'Montserrat'),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -108,19 +150,34 @@ class _FivePageState extends State<ListPage> {
                         child: ListView.builder(
                           itemCount: todoList.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Card(
-                                child: ListTile(
-                                  title: Text(todoList[index].titulo),
-                                  subtitle: Text(todoList[index].descricao),
-                                  trailing: IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () {
-                                      controller.apagarCard(index);
-                                    },
+                            return Card(
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ListTile(
+                                        title: Text(todoList[index].titulo),
+                                        subtitle:
+                                            Text(todoList[index].descricao),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () {
+                                        deleteConfirmation(
+                                          todoList[index].id,
+                                          todoList[index].titulo,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           },

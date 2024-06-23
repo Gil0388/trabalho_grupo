@@ -42,13 +42,16 @@ class TodosController extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  void apagarCard(int id) {
-    todoList.removeAt(id);
+ 
+  Future<void> apagarCard(int id) async {
+    await todoRepository.deleteTodo(id);
+    todoList.removeWhere((todo) => todo.id == id);
+    filtrada = todoList;
     notifyListeners();
   }
 
   void postTodo() async {
-    todoRepository.postTodo();
+    await todoRepository.postTodo();
+    getTodoList();
   }
 }
