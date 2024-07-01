@@ -1,269 +1,161 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:trabalho_grupo/data/model/todo_model.dart';
-import '../styles/styles.dart';
+import 'package:trabalho_grupo/styles/styles.dart';
 
-class SixthPage extends StatefulWidget {
-  const SixthPage({super.key});
+class AddTodoPage extends StatefulWidget {
+  const AddTodoPage({Key? key}) : super(key: key);
 
   @override
-  State<SixthPage> createState() => _SixthPageState();
+  State<AddTodoPage> createState() => _AddTodoPageState();
 }
 
-class _SixthPageState extends State<SixthPage> {
-  // Controllers e key para guardar as informações.
-  final TextEditingController tituloCtrll = TextEditingController();
-  final TextEditingController descricaoCtrll = TextEditingController();
-  final GlobalKey<FormState> _acesso = GlobalKey();
-
-  // Variável que guarda a cor do Card.
-  Color? selectedColor;
+class _AddTodoPageState extends State<AddTodoPage> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _tituloController = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
+  Color _selectedColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: pink,
-        body: SingleChildScrollView(
-          // Resolver o Erro Bottom Overflowed no Flutter quando o Teclado abre
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Column(
-            // LOGO DA LOVEPEOPLE E NOME
-            children: [
-              Row(
-                //crossAxisAlignment: CrossAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: pink,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              //padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+              child: Row(
                 children: [
-                  Container(
-                    height: 100.0,
-                    width: 100.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomRight:
-                            Radius.circular(100.0), // Define o raio desejado
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight:
+                          Radius.circular(100.0), // Define o raio desejado
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      // Ajuste o valor conforme necessário
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Align(
-                          alignment: Alignment
-                              .centerLeft, // Alinha o widget à esquerda
-                          child: Image.asset(
-                            'assets/images/lovepeople_logo.png',
-                            height: 52,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        // Ajuste o valor conforme necessário
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Align(
+                            alignment: Alignment
+                                .centerLeft, // Alinha o widget à esquerda
+                            child: Image.asset(
+                              'assets/images/lovepeople_logo.png',
+                              height: 52,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                    width: 250.0,
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                          top: 50), // Ajuste o valor conforme necessário
-                      alignment: Alignment.topCenter,
-                      child: const Text(
-                        'Nova Tarefa',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Montserrat',
-                          fontSize: 20,
-                        ),
-                      ),
+                  const SizedBox(width: 18.0),
+                  Text(
+                    'Adicionar Nota',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              // FORMULARIO DE NOTAS
-              Container(
-                padding: const EdgeInsets.all(30),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Form(
-                  key: _acesso,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: _formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Container(
-                        height: 40, // Defina a altura desejada aqui
-                        decoration: BoxDecoration(
-                          color:
-                              Colors.white, // Define a cor de fundo como branco
-                          borderRadius: BorderRadius.circular(
-                              9.0), // Opcional: arredonda as bordas
-                        ),
-                        child: TextFormField(
-                          controller: tituloCtrll,
-                          decoration: const InputDecoration(
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
-                            hintText: 'Título da Tarefa',
-                            hintStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xffa901f7),
-                            ),
-                            border: InputBorder
-                                .none, // Remove a borda padrão do TextFormField
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 16.0,
-                            ), // Adiciona preenchimento interno
-                          ),
-                          style: const TextStyle(
-                            fontFamily: 'Montserrat',
+                      TextFormField(
+                        controller: _tituloController,
+                        decoration: InputDecoration(
+                          labelText: 'Título da Tarefa',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira um título';
+                          }
+                          return null;
+                        },
                       ),
-                      const SizedBox(height: 16.0), // Espaço entre os elementos
-                      Container(
-                        height: 280, // Defina a altura desejada aqui
-                        decoration: BoxDecoration(
-                          color:
-                              Colors.white, // Define a cor de fundo como branco
-                          borderRadius: BorderRadius.circular(
-                              8.0), // Opcional: arredonda as bordas
-                        ),
-                        child: TextField(
-                          controller: descricaoCtrll,
-                          style: const TextStyle(
-                            fontFamily: 'Montserrat',
+                      const SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: _descricaoController,
+                        maxLines: null, // Permitir múltiplas linhas
+                        keyboardType: TextInputType.multiline, // Teclado para múltiplas linhas
+                        decoration: InputDecoration(
+                          labelText: 'Descrição',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          decoration: const InputDecoration(
-                            hintText: 'Escreva uma descrição para sua tarefa.',
-                            hintStyle: TextStyle(color: Color(0xFF909ba2)),
-                            border: InputBorder
-                                .none, // Remove a borda padrão do TextFormField
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal:
-                                    16.0), // Adiciona preenchimento interno
-                          ),
-                          keyboardType: TextInputType.multiline,
-                          maxLines:
-                              null, // Permite múltiplas linhas e quebra de linha
+                          contentPadding: EdgeInsets.symmetric(vertical: 90.0, horizontal: 12.0), // Ajuste de altura
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira uma descrição';
+                          }
+                          return null;
+                        },
                       ),
-                      const SizedBox(height: 50.0),
+                      const SizedBox(height: 16.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                selectedColor = yellowLight;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder(),
-                              backgroundColor: yellowLight,
-                              padding: const EdgeInsets.all(15),
-                              side: selectedColor == yellowLight
-                                  ? const BorderSide(
-                                      color: Colors.black, width: 2)
-                                  : BorderSide.none,
-                            ),
-                            child: const Text(''),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                selectedColor = pinkLight;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder(),
-                              backgroundColor: pinkLight,
-                              padding: const EdgeInsets.all(15),
-                              side: selectedColor == pinkLight
-                                  ? const BorderSide(
-                                      color: Colors.black, width: 2)
-                                  : BorderSide.none,
-                            ),
-                            child: const Text(''),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                selectedColor = purpleLight;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder(),
-                              backgroundColor: purpleLight,
-                              padding: const EdgeInsets.all(15),
-                              side: selectedColor == purpleLight
-                                  ? const BorderSide(
-                                      color: Colors.black, width: 2)
-                                  : BorderSide.none,
-                            ),
-                            child: const Text(''),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                selectedColor = blueLight;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder(),
-                              backgroundColor: blueLight,
-                              padding: const EdgeInsets.all(15),
-                              side: selectedColor == blueLight
-                                  ? const BorderSide(
-                                      color: Colors.black, width: 2)
-                                  : BorderSide.none,
-                            ),
-                            child: const Text(''),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                selectedColor = greenLight;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder(),
-                              backgroundColor: greenLight,
-                              padding: const EdgeInsets.all(15),
-                              side: selectedColor == greenLight
-                                  ? const BorderSide(
-                                      color: Colors.black, width: 2)
-                                  : BorderSide.none,
-                            ),
-                            child: const Text(''),
-                          ),
+                          _buildColorButton(yellowLight),
+                          _buildColorButton(pinkLight),
+                          _buildColorButton(purpleLight),
+                          _buildColorButton(blueLight),
+                          _buildColorButton(greenLight),
                         ],
                       ),
-                      const SizedBox(height: 120.0),
+                      const SizedBox(height: 32.0),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/tela5');
+                              Navigator.pop(context);
                             },
                             child: const Icon(
                               CupertinoIcons.clear_thick,
                               color: Colors.white,
-                              size: 90,
+                              size: 56,
                             ),
-                          ), // Ícone de cancelar
+                          ),
                           const SizedBox(width: 30),
                           GestureDetector(
                             onTap: () {
-                              if (_acesso.currentState!.validate()) {
+                              if (_formKey.currentState!.validate()) {
                                 Navigator.pop(
                                   context,
                                   TodoModel(
                                     id: 0,
-                                    titulo: tituloCtrll.text,
-                                    descricao: descricaoCtrll.text,
-                                    cores: selectedColor,
+                                    titulo: _tituloController.text,
+                                    descricao: _descricaoController.text,
+                                    cores: _selectedColor,
                                   ),
                                 );
                               }
@@ -271,19 +163,38 @@ class _SixthPageState extends State<SixthPage> {
                             child: const Icon(
                               CupertinoIcons.checkmark_alt,
                               color: Colors.white,
-                              size: 90,
+                              size: 56,
                             ),
-                          ), // Ícone de ok
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildColorButton(Color color) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          _selectedColor = color;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        backgroundColor: color,
+        padding: const EdgeInsets.all(15),
+        side: _selectedColor == color
+            ? const BorderSide(color: Colors.black, width: 2)
+            : BorderSide.none,
+      ),
+      child: const SizedBox.shrink(),
     );
   }
 }

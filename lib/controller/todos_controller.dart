@@ -36,13 +36,13 @@ class TodosController extends ChangeNotifier {
     } else {
       filtrada = todoList
           .where((item) =>
-              item.titulo.toLowerCase().contains(query) ||
-              item.descricao.toLowerCase().contains(query))
+      item.titulo.toLowerCase().contains(query) ||
+          item.descricao.toLowerCase().contains(query))
           .toList();
     }
     notifyListeners();
   }
- 
+
   Future<void> apagarCard(int id) async {
     await todoRepository.deleteTodo(id);
     todoList.removeWhere((todo) => todo.id == id);
@@ -50,8 +50,8 @@ class TodosController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void postTodo() async {
-    await todoRepository.postTodo();
+  Future<void> postTodo(TodoModel todo) async {
+    await todoRepository.postTodo(todo);
     getTodoList();
   }
 }
