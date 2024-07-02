@@ -118,7 +118,7 @@ class FourthPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/tela1');
+              Navigator.pushNamed(context, '/Login');
             },
             child: const Text(
               'Clique aqui',

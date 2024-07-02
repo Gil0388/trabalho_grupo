@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         '/SignUpSuccess': (context) => const SignUpSuccessPage(),
         '/tela4': (context) => const FourthPage(),
         '/tela5': (context) => const ListPage(),
-        '/tela6': (context) => const SixthPage(),
+        '/tela6': (context) => const AddTodoPage(),
       },
       initialRoute: '/Login',
     );
